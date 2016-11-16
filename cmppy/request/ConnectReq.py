@@ -13,9 +13,10 @@ class ConnectReq(Request):
         _sp_id = sp_id.encode('utf-8')
         _sp_secret = sp_secret.encode("utf-8")
         _version = struct.pack('!B', 0x30)
-        _timestamp = _get_strtime().encode('utf-8')
-        _md5 = hashlib.md5(_sp_id + 9 * b'\0x00' + _sp_secret).digest()
-        message_body = _sp_id + _md5 + _version + _timestamp
+        _time_str = _get_strtime()
+        _timestamp = struct.pack('!L', int(_time_str))
+        self.authenticator_source = hashlib.md5(_sp_id + 9 * b'\x00' + _sp_secret + _time_str.encode('utf-8')).digest()
+        message_body = _sp_id + self.authenticator_source + _version + _timestamp
         Request.__init__(self, 0x00000001, message_body)
 
 
