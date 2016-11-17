@@ -24,6 +24,5 @@ _res_mapping = {0x80000001: ConnectRes
 
 
 def parse_response(message):
-    print message.encode('hex')
     command_id, = struct.unpack('!L', message[4:8])
     return _res_mapping[command_id](message)

@@ -77,6 +77,7 @@ class Cmppy:
         if content_length:
             length, = struct.unpack('!L', content_length)
             response = content_length + self._so.recv(length)
+            print 'Read:' + response.encode('hex')
             return response
         return None
 
