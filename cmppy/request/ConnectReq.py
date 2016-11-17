@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__author__ = 'bac'
 from . import Request
 import time
 import hashlib
 import struct
+
+__author__ = 'bac'
 
 
 class ConnectReq(Request):

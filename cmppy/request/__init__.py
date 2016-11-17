@@ -24,3 +24,4 @@ class Request:
 
 from ConnectReq import ConnectReq
 from TerminateReq import TerminateReq
+from SubmitReq import SubmitReq

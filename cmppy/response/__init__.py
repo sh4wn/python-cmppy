@@ -16,9 +16,11 @@ class Response:
 
 from ConnectRes import ConnectRes
 from TerminateRes import TerminateRes
+from SubmitRes import SubmitRes
 
 _res_mapping = {0x80000001: ConnectRes
-    , 0x80000002: TerminateRes}
+    , 0x80000002: TerminateRes
+    , 0x80000004: SubmitRes}
 
 
 def parse_response(message):
