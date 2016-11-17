@@ -14,9 +14,9 @@ class Response:
         self.message_body = message[12:self.length]
 
 
-from ConnectRes import ConnectRes
-from TerminateRes import TerminateRes
-from SubmitRes import SubmitRes
+from .ConnectRes import ConnectRes
+from .TerminateRes import TerminateRes
+from .SubmitRes import SubmitRes
 
 _res_mapping = {0x80000001: ConnectRes
     , 0x80000002: TerminateRes

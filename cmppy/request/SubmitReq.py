@@ -29,7 +29,7 @@ class SubmitReq(Request):
                  valid_time=17 * '\x00',
                  at_time=17 * '\x00',
                  dest_terminal_type=0,
-                 linkid=20 * b'\x00'):
+                 linkid=''):
 
         if len(msg_content) >= 70:
             raise ValueError("msg_content more than 70 words")
@@ -41,7 +41,7 @@ class SubmitReq(Request):
         _pk_number = struct.pack('!B', pk_number)
         _registered_delivery = struct.pack('!B', registered_delivery)
         _msg_level = struct.pack('!B', msg_level)
-        _service_id = (service_id + (10 - len(service_id)) * b'\x00').encode('utf-8')
+        _service_id = (service_id + (10 - len(service_id)) * '\x00').encode('utf-8')
         _fee_usertype = struct.pack('!B', fee_usertype)
         _fee_terminal_id = (fee_terminal_id + (32 - len(fee_terminal_id)) * '\x00').encode('utf-8')
         _fee_terminal_type = struct.pack('!B', fee_terminal_type)
@@ -61,7 +61,7 @@ class SubmitReq(Request):
         _dest_terminal_type = struct.pack('!B', dest_terminal_type)
         _msg_content = msg_content.encode('utf-16-be')
         _msg_length = struct.pack('!B', len(_msg_content))
-        _linkid = linkid.encode('utf-8')
+        _linkid = (linkid + (20 - len(linkid)) * '\x00').encode('utf-8')
         _message_body = _msg_id + \
                         _pk_total + _pk_number + \
                         _registered_delivery + \

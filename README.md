@@ -1,2 +1,2 @@
 # python-cmppy
-a Python CMPP impelement
+a Python CMPP client impelemention

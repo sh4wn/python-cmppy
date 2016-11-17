@@ -22,6 +22,6 @@ class Request:
                        + self._message_body
 
 
-from ConnectReq import ConnectReq
-from TerminateReq import TerminateReq
-from SubmitReq import SubmitReq
+from .ConnectReq import ConnectReq
+from .TerminateReq import TerminateReq
+from .SubmitReq import SubmitReq

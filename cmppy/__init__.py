@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 
 
-from request import Request, ConnectReq, TerminateReq, SubmitReq
-from response import parse_response
+from .request import Request, ConnectReq, TerminateReq, SubmitReq
+from .response import parse_response
 import socket
 import struct
 import hashlib
+import binascii
 
 __author__ = 'bac'
 
@@ -69,7 +70,7 @@ class Cmppy:
         self._so.connect((self._host, self._port))
 
     def _write(self, message):
-        print 'Write:' + message.encode('hex')
+        _log('Write:' + str(binascii.hexlify(message)))
         self._so.send(message)
 
     def _read(self):
@@ -77,7 +78,7 @@ class Cmppy:
         if content_length:
             length, = struct.unpack('!L', content_length)
             response = content_length + self._so.recv(length)
-            print 'Read:' + response.encode('hex')
+            _log('Read:' + str(binascii.hexlify(response)))
             return response
         return None
 
@@ -86,6 +87,12 @@ class Cmppy:
 
     def _valid_auth(self, authenticator_source, status, authenticator_ISMG):
         match_md5 = hashlib.md5(status + authenticator_source + self._sp_secret.encode("utf-8")).digest()
-        print status.encode("hex") + ":" + authenticator_source.encode('hex')
-        print match_md5.encode("hex") + ":" + authenticator_ISMG.encode("hex")
+        print
+        status.encode("hex") + ":" + authenticator_source.encode('hex')
+        print
+        match_md5.encode("hex") + ":" + authenticator_ISMG.encode("hex")
         return match_md5 == authenticator_ISMG
+
+
+def _log(msg):
+    print(msg)
